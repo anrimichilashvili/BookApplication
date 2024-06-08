@@ -1,0 +1,41 @@
+﻿@model IEnumerable<BookApplication.Models.Author>
+
+<h2 class="text-center my-4">Authors</h2>
+
+@if (Model == null || !Model.Any())
+{
+    <p class="text-center">No authors available.</p>
+}
+else
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var author in Model)
+            {@if (!author.IsDeleted)
+                {
+                    <tr>
+                        <td>@author.FirstName</td>
+                    <td>@author.LastName</td>
+                    <td>
+                        <a href="@Url.Action("Details", new { id = author.Id })" class="btn btn-info btn-sm">Details</a>
+                        <a href="@Url.Action("Edit", new { id = author.Id })" class="btn btn-warning btn-sm">Edit</a>
+                        <a href="@Url.Action("Delete", new { id = author.Id })" class="btn btn-danger btn-sm">Delete</a>
+                    </td>
+                </tr>
+                }
+            }
+        </tbody>
+    </table>
+}
+
+<div class="text-center mt-4">
+    <a href="@Url.Action("Create")" class="btn btn-success">Create New Author</a>
+</div>
+

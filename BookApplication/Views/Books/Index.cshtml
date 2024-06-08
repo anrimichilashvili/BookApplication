@@ -1,0 +1,67 @@
+﻿@model IEnumerable<BookApplication.Models.Book>
+
+<h2 class="text-center my-4">Books</h2>
+
+@if (Model == null || !Model.Any())
+{
+    <p class="text-center">No books available.</p>
+}
+else
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Image</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Authors</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var book in Model)
+            {
+                @if (!book.IsDeleted)
+                {
+                    <tr>
+                        <td><img src="@book.ImageUrl" alt="@book.Title" width="50" /></td>
+                        <td>@book.Title</td>
+                        <td>@book.Description</td>
+                        <td>
+                            @if (book.Authors != null && book.Authors.Any())
+                            {
+                                foreach (var author in book.Authors)
+                                {
+
+
+                                    <p>@author.FullName</p>
+
+                                }
+                            }
+                            else
+                            {
+                                <p>No authors available</p>
+                            }
+                        </td>
+                        <td>
+                            <a href="@Url.Action("Details", new { id = book.Id })" class="btn btn-info btn-sm">Details</a>
+                            <a href="@Url.Action("Edit", new { id = book.Id })" class="btn btn-warning btn-sm">Edit</a>
+                            <a href="@Url.Action("Delete", new { id = book.Id })" class="btn btn-danger btn-sm">Delete</a>
+                            @if (book.IsBorrowed)
+                            {
+                                <a href="@Url.Action("Return", new { id = book.Id })" class="btn btn-secondary btn-sm">Return</a>
+                            }
+                            else
+                            {
+                                <a href="@Url.Action("Borrow", new { id = book.Id })" class="btn btn-primary btn-sm">Borrow</a>
+                            }
+                    </td>
+                </tr>
+                }
+            }
+        </tbody>
+    </table>
+}
+<div class="text-center mt-4">
+    <a href="@Url.Action("Create", "Books")" class="btn btn-success">Create New Book</a>
+</div>

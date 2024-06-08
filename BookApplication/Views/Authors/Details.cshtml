@@ -1,0 +1,26 @@
+﻿@model BookApplication.Models.Author
+
+<div class="container mt-4">
+    <h2>Author Details</h2>
+    <div class="card mb-4">
+        <div class="card-body">
+            <h4 class="card-title">@Model.FirstName @Model.LastName</h4>
+            <p class="card-text"><strong>Birth Year:</strong> @Model.BirthYear.ToString("yyyy")</p>
+            <p class="card-text"><strong>Books:</strong></p>
+            <ul>
+                @if (Model.Books != null && Model.Books.Any())
+                {
+                    @foreach (var book in Model.Books)
+                    {
+                        <li>@book.Title</li>
+                    }
+                }
+                else
+                {
+                    <p>No books available for this author.</p>
+                }
+            </ul>
+        </div>
+    </div>
+    <a href="@Url.Action("Index")" class="btn btn-primary">Back to Authors List</a>
+</div>

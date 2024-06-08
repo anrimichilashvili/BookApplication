@@ -1,0 +1,54 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<style>
+    .homepage {
+        background: linear-gradient(to bottom right, #f8f9fa, #e9ecef);
+        height: 80vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        flex-direction: column;
+    }
+
+    .welcome-message {
+        max-width: 600px;
+        margin-bottom: 30px;
+    }
+
+    .nav-buttons {
+        margin-top: 30px;
+    }
+
+    .btn-custom {
+        padding: 15px 30px;
+        font-size: 1.2em;
+    }
+
+    .hero-image {
+        background: url('/images/library-bg.jpg') no-repeat center center;
+        background-size: cover;
+        filter: blur(5px);
+        -webkit-filter: blur(5px);
+        height: 50vh;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: -1;
+    }
+</style>
+
+<div class="hero-image"></div>
+
+<div class="homepage">
+    <h1 class="display-4">Welcome to the Book Management System</h1>
+ 
+
+    <div class="nav-buttons">
+        <a href="@Url.Action("Index", "Books")" class="btn btn-primary btn-custom mx-2">Go to Books</a>
+        <a href="@Url.Action("Index", "Authors")" class="btn btn-secondary btn-custom mx-2">Go to Authors</a>
+    </div>
+</div>
